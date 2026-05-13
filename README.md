@@ -1,0 +1,1 @@
+Planeamos reconstruir una red de VIH, encontrar si es una red de tipo free-scale, si hay hubs dado el sexo y localidad, descubrir si existe una propagación de la resistencia, además de calcular las medidas de centralidad, como betweeness que nos dará una pista sobre si hay lugares importantes para la transmisión del virus.
