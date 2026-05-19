@@ -1,0 +1,22 @@
+---
+title: "Avance_Proyecto_Final_DP_FP"
+author: "Maria Fernanda Pacheco Estrella & Diego Puente Rivera"
+date: "2026-05-13"
+output: html_document
+---
+
+Este es el documento para mostrar el avance
+
+## Bibliografía
+
+-   Red de transmisión y vigilancia de farmacorresistencia del VIH en la CDMX. (s. f.). Red de Transmisión y Vigilancia de Farmacorresistencia del VIH En la CDMX. <https://salud.conahcyt.mx/vih/datos>
+
+-   VIH y el SIDA: Conceptos básicos \| NIH. (s. f.). <https://hivinfo.nih.gov/es/understanding-hiv/fact-sheets/vih-y-el-sida-conceptos-basicos>
+
+-   García-Morales, C., Tapia-Trejo, D., Matías-Florentino, M., Quiroz-Morales, V. S., Dávila-Conn, V., Beristain-Barreda, Á., Cárdenas-Sandoval, M., Becerril-Rodríguez, M., Iracheta-Hernández, P., Macías-González, I., García-Mendiola, R., Guzmán-Carmona, A., Zarza-Sánchez, E., Cruz, R. A., González-Rodríguez, A., Reyes-Terán, G., & Ávila-Ríos, S. (2021). HIV Pretreatment Drug Resistance Trends in Mexico City, 2017-2020. Pathogens (Basel, Switzerland), 10(12), 1587. <https://doi.org/10.3390/pathogens10121587> 
+
+-   García-Morales, C., Tapia-Trejo, D., Quiroz-Morales, V. S., Navarro-Álvarez, S., Barrera-Arellano, C. A., Casillas-Rodríguez, J., Romero-Mora, K. A., Gómez-Palacio-Schjetnan, M., Murakami-Ogasawara, A., Ávila-Ríos, S., Reyes-Terán, G., & HIVDR MexNet Group (2017). HIV pretreatment drug resistance trends in three geographic areas of Mexico. The Journal of antimicrobial chemotherapy, 72(11), 3149–3158. <https://doi.org/10.1093/jac/dkx281> 
+
+-   Escoto-Delgadillo, M., Torres-Mendoza, B. M., Flores-Soto, M., & Vazquez-Valls, E. (2016). HIV Drug Resistance in Antiretroviral-Naive Patients in Mexico After 10 Years: Is There a Difference?. AIDS research and human retroviruses, 32(12), 1219–1222. <https://doi.org/10.1089/AID.2016.0143> 
+
+-   Pineda-Peña, A. C., Bello, D. C., Sussmann, O., Vandamme, A. M., Vercauteren, J., van Laethem, K., & Gómez-López, A. (2012). HIV-1 transmitted drug resistance in Latin America and the Caribbean: what do we know?. AIDS reviews, 14(4), 256–267.
