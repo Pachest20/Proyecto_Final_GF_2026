@@ -1,0 +1,27 @@
+---
+title: "Descripción de proyecto"
+author: "Diego Puente Rivera"
+date: "2026-05-13"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Propuesta de proyecto.
+
+Pacheco Estrella María Fernanda y Puente Rivera Diego
+
+La base de datos adjunta contiene parámetros de interés para reconstruir una red sobre la distribución de VIH a nivel nacional, además señala el número de conexiones de cada individuo, así como la estado, sexo, edad, si tiene resistencia a fármacos, entre otros datos.
+
+Planeamos reconstruir la red, encontrar si es una red de tipo free-scale, si hay hubs dado el sexo y localidad, descubrir si existe una propagación de la resistencia, además de calcular las medidas de centralidad, como betweeness que nos dará una pista sobre si hay lugares importantes para la transmisión del virus.
+
+```{r}
+library(igraph)
+```
+
+```{r}
+vih_data<-read.csv("vih_red_completa.csv")
+head(vih_data)
+```
