@@ -10,7 +10,6 @@ library(tidyverse)
 vih_data_r <- vih_data$resistencia=="Sin resistencia"
 vih_data$resistencia[vih_data_r] <- "sin_resistencia"
 
-
 conexiones <- vih_data %>%
   filter(cluster_id != 0 & cd4_a < 200) %>%    # Seleccionamos solo aquellos en clusters y con conteo de linfocitos CD4  mayor a 500
   group_by(cluster_id) %>%      # Agrupamos mediante este criterio
@@ -27,8 +26,19 @@ colores  <- c("NNRTI" = "lightblue", "NRTI"="orange",
 
 g <- graph_from_data_frame(conexiones, directed = F)
 
-tkplot(g, vertex.label = NA,  vertex.size  = 6, 
+plot(g, vertex.label = NA,  vertex.size  = 6, 
      vertex.color = colores[vih_data$resistencia])
 
 vcount(g) # Número de nodos
 ecount(g) # Número de conexiones
+
+# Tabla de datos limpia con los datos que vamos a utilizar #
+
+columnas_non <- c("colonia", "municipio", "cp", "seguridad_social") #crear un nuevo 
+#objeto en el que indiquemos las columnas que no necesitamos#
+
+vih_data_limpia <-vih_data[, !names(vih_data) %in% columnas_non] #para no modificar 
+#nuestra base de datos original, creamos una nueva tabla, ahí indicamos de donde va 
+#a tomar los datos de las columnas a borrar#
+
+
