@@ -4,6 +4,13 @@ library(dplyr)
 
 vih_data<-read.csv("vih_red_completa.csv")
 
+#modificar la base de datos para corregir un error#
+
+library(tidyverse)
+vih_data_r <- vih_data$resistencia=="Sin resistencia"
+vih_data$resistencia[vih_data_r] <- "sin_resistencia"
+
+
 conexiones <- vih_data %>%
   filter(cluster_id != 0 & cd4_a < 200) %>%    # Seleccionamos solo aquellos en clusters y con conteo de linfocitos CD4  mayor a 500
   group_by(cluster_id) %>%      # Agrupamos mediante este criterio
