@@ -19,7 +19,7 @@ conexiones <- vih_data %>%
   tidyr::unnest(pares) %>%  # Deshanida la lista anterior para que igraph pueda leerla
   mutate(from = sapply(pares, `[[`, 1),      # Genera dos nuevas columnas "from" y "to" 
          to   = sapply(pares, `[[`, 2)) %>%  # señalando de dónde sale y a dónde llega 
-  select(from, to)            # Se descarta la columna pares
+  select(from, to)            # Se descarta la columna "pares"
 
 colores  <- c("NNRTI" = "lightblue", "NRTI"="orange", 
               "PI"="lightgreen", "sin_resistencia"="purple")
@@ -51,4 +51,89 @@ vih_data_limpia <- vih_data_limpia[vih_data_limpia$edad != "", ]
 
 # Comparación de los datos obtenidos de la base de datos #
 
-#
+################################################################################
+
+write_graph(g, "red_VIHP1.graphml", format = "graphml") 
+# Exportar para visualizar en Cytoscape pero no sirvió
+
+
+###############################################################################
+
+conexiones_buena <- vih_data_limpia %>%
+  filter(cluster_id != 0 & cd4_a < 200) %>%    # Seleccionamos solo aquellos en clusters y con conteo de linfocitos CD4  mayor a 500
+  group_by(cluster_id) %>%      # Agrupamos mediante este criterio
+  filter(n() >= 4) %>%          # Excluye clusters con menos de 4 individuos
+  summarise(pares = list(combn(id_muestra, 2, simplify = F))) %>% 
+  # Nuevo df, "pares" que contiene las combinaciones del id según su cluster
+  tidyr::unnest(pares) %>%  # Deshanida la lista anterior para que igraph pueda leerla
+  mutate(from = sapply(pares, `[[`, 1),      # Genera dos nuevas columnas "from" y "to" 
+         to   = sapply(pares, `[[`, 2)) %>%  # señalando de dónde sale y a dónde llega 
+  select(from, to)            # Se descarta la columna "pares"
+
+
+g2 <- graph_from_data_frame(conexiones_buena, directed = F)
+
+vcount(g2) ## corroborar si se hizo bien la base 
+
+############## graficar completo ###############3
+
+layout <- layout_with_graphopt(g2, niter  = 15000, charge = 0.08)
+
+
+plot(g2,
+     vertex.label = NA,
+     vertex.size = 3,
+     vertex.color = colores[vih_data_limpia$resistencia],
+     layout = layout)
+
+legend("bottomright",
+       legend = names(colores),
+       fill   = colores,
+       cex    = 0.5,
+       bty    = "n")
+
+
+########### graficar por clusters  ##############
+
+par(mfrow = c(2, 4))
+
+subg <- decompose(g2)
+
+for (sg in subg) {
+  plot(sg, vertex.label = NA,  vertex.size  = 8, 
+       vertex.color = colores[vih_data_limpia$resistencia])
+}
+
+legend("bottomright",
+       legend = names(colores),
+       fill   = colores,
+       cex    = 0.5,
+       bty    = "n")
+
+par(mfrow = c(1, 1))
+
+###################################################################################
+
+library(ggplot2)
+
+
+ggplot(vih_data_limpia, aes(x = edad_rango, y = cv)) +
+  geom_boxplot()
+
+ggplot(vih_data_limpia, aes(x = edad_rango, y = cd4_a)) +
+  geom_boxplot()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
