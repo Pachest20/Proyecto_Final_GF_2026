@@ -131,7 +131,8 @@ plot(g2,
      vertex.label = NA,
      vertex.size = 3,
      vertex.color = colores[vih_data_limpia$resistencia],
-     layout = layout)
+     layout = layout,
+     main = "Red de VIH por clusters")
 
 legend("bottomright",
        legend = names(colores),
@@ -173,7 +174,7 @@ ggplot(vih_data_limpia, aes(x = edad_rango, y = cd4_a)) +
     y = "Conteo de células CD4"
   ) 
 
-# Gráfica para comparar los niveles de carga de virulencia por rango de edad #
+# Gráfica para comparar los niveles de carga de viral por rango de edad #
 
 ggplot(vih_data_limpia, aes(x = edad_rango, y = cv)) +
   geom_boxplot(fill = "red3", color = "red4") +
