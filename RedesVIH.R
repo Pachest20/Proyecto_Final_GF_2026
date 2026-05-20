@@ -41,4 +41,14 @@ vih_data_limpia <-vih_data[, !names(vih_data) %in% columnas_non] #para no modifi
 #nuestra base de datos original, creamos una nueva tabla, ahí indicamos de donde va 
 #a tomar los datos de las columnas a borrar#
 
+#haremos la comparación de edad con varias categorías, así que vamos a eliminar 
+#aquellos datos que no tengan edad para que quede mejor la tabla#
 
+vih_data_limpia <- vih_data_limpia[vih_data_limpia$edad != "", ]
+#en la tabla no hay "0" o "NA", son simplemente espacios vacíos, por lo que en la 
+#base de datos limpia vamos a indicar de que columna queremos eliminar esos espacios
+#vacíos#
+
+# Comparación de los datos obtenidos de la base de datos #
+
+#
