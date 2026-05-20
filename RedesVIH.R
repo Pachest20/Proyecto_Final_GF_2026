@@ -1,4 +1,41 @@
 
+# Tablas de nuevos casos #
+
+casos_2024 <- data.frame(
+  Sexo = c("Hombres", "Mujeres"),
+  Casos = c(2438, 386)
+)
+
+casos_2024$Total_de_casos <- sum(casos_2024$Casos)
+casos_2024
+
+casos_2025 <- data.frame(
+  Sexo = c("Hombres", "Mujeres"),
+  Casos = c(2632, 365)
+)
+
+casos_2025$Total_de_casos <- sum(casos_2025$Casos)
+casos_2025
+
+# Gráfica de barras de nuevos casos #
+library(ggplot2)
+nuevos_casos <- ggplot() +
+  geom_col(data = casos_2024, aes(x=Sexo, y=Casos),
+           fill = "lightblue", colour = "lightblue", 
+           alpha = 0.5, width = 0.5) +
+  geom_col(data = casos_2025, aes(x= Sexo, y=Casos),
+           fill = "orange", colour = "orange", 
+           alpha = 0.5, width = 0.4) +
+  labs(
+    title = "Comparativa de Casos por sexo 2024 vs. 2025", 
+    x = "Sexo (Hombres / Mujeres)",
+    y = "Número de casos total hasta el tercer trimestre") +
+  theme_minimal()
+
+plot(nuevos_casos)
+
+###############################################################################
+
 library(igraph)
 library(dplyr)
 
@@ -116,18 +153,30 @@ par(mfrow = c(1, 1))
 
 library(ggplot2)
 
-
-ggplot(vih_data_limpia, aes(x = edad_rango, y = cv)) +
-  geom_boxplot()
+# Gráfica para comparar los niveles de linfocitos CD4 por rango de edad #
 
 ggplot(vih_data_limpia, aes(x = edad_rango, y = cd4_a)) +
-  geom_boxplot()
+  geom_boxplot(fill = "pink3", color = "pink2") +
+  labs(
+    title = "Conteo de linfocitos CD4 por rango de edad", 
+    x = "Rango de edad", 
+    y = "Conteo de células CD4"
+  ) +
+  theme_minimal()
 
 
+# Gráfica para comparar los niveles de carga de virulencia por rango de edad #
 
+ggplot(vih_data_limpia, aes(x = edad_rango, y = cv)) +
+  geom_boxplot(fill = "red3", color = "red4") +
+  labs(
+    title = "Nivel de carga viral por rango de edad", 
+    x = "Rango de edad", 
+    y = "Carga viral"
+  ) +
+  theme_minimal()
 
-
-
+# Gráfica de resistencia con la toma de las muestras #
 
 
 
