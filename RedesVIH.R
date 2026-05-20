@@ -23,11 +23,11 @@ conexiones <- vih_data %>%
   select(from, to)            # Se descarta la columna pares
 
 colores  <- c("NNRTI" = "lightblue", "NRTI"="orange", 
-              "PI"="lightgreen", "Sin resistenica"="purple")
+              "PI"="lightgreen", "sin_resistencia"="purple")
 
 g <- graph_from_data_frame(conexiones, directed = F)
 
-plot(g, vertex.label = NA,  vertex.size  = 6, 
+tkplot(g, vertex.label = NA,  vertex.size  = 6, 
      vertex.color = colores[vih_data$resistencia])
 
 vcount(g) # Número de nodos
