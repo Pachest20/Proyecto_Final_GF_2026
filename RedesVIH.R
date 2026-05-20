@@ -31,6 +31,10 @@ nuevos_casos <- ggplot() +
     x = "Sexo (Hombres / Mujeres)",
     y = "Número de casos total hasta el tercer trimestre") +
   theme_minimal()
+#Para poder ver el cambio busque como hacer transparentes las barras, esa información 
+#la obtuve de acá: GeeksforGeeks. (2025, 16 abril). Transparent Scatterplot 
+#Points in Base R and ggplot2. GeeksforGeeks. 
+#https://www-geeksforgeeks-org.translate.goog/r-language/transparent-scatterplot-points-in-base-r-and-ggplot2/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc&_x_tr_hist=true
 
 plot(nuevos_casos)
 
@@ -161,9 +165,7 @@ ggplot(vih_data_limpia, aes(x = edad_rango, y = cd4_a)) +
     title = "Conteo de linfocitos CD4 por rango de edad", 
     x = "Rango de edad", 
     y = "Conteo de células CD4"
-  ) +
-  theme_minimal()
-
+  ) 
 
 # Gráfica para comparar los niveles de carga de virulencia por rango de edad #
 
@@ -173,11 +175,52 @@ ggplot(vih_data_limpia, aes(x = edad_rango, y = cv)) +
     title = "Nivel de carga viral por rango de edad", 
     x = "Rango de edad", 
     y = "Carga viral"
-  ) +
-  theme_minimal()
+  ) 
 
 # Gráfica de resistencia con la toma de las muestras #
 
+#Para poder hacer esta gráfica hay que crear una nueva tabla, en donde agrupemos los
+#valores de "resistencia" a un solo valor, porque realmente no nos interesa mucho 
+#el tipo de resistencia, solo ver como va cambiando el panorama de la resistencia
+#a lo largo de los años#
+tabla_resistencia <- data.frame(
+  ID = vih_data_limpia$id_muestra,
+  m_a = substr(vih_data_limpia$`fecha_toma`, 1, 7)
+)
+
+tabla_resistencia$Resistente[vih_data_limpia$resistencia == "sin_resistencia"] <- 0 
+tabla_resistencia$Resistente[vih_data_limpia$resistencia == "NRTI"] <- 1
+tabla_resistencia$Resistente[vih_data_limpia$resistencia == "NNRTI"] <- 1
+tabla_resistencia$Resistente[vih_data_limpia$resistencia == "PI"] <- 1
+tabla_resistencia$Resistente[vih_data_limpia$resistencia == "Compleja"] <- 1
+tabla_resistencia$Resistente[vih_data_limpia$resistencia == "Pendiente"] <- 1
+
+tabla_resistencia <- na.omit(tabla_resistencia) #función para eliminar aquellos
+#datos que salgan con "NA"#
+
+#Una vez que tenemos esta nueva tabla con los valores que necesitamos y que ya 
+#filtramos nuestra base de datos, vamos a creaun una gráfica en donde podamos 
+#visualizar el número de casos con y sin resistencia con el paso del tiempo#
+nuevos_casos <- ggplot(tabla_resistencia, aes(x = m_a, fill = as.factor(Resistente))) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Distribución Mensual de Casos con y sin resistencia",
+    x = "Fecha de toma de muestra (Mes y Año)",
+    y = "Número total de pacientes"
+  ) +
+  scale_fill_manual(
+    values = c("lightblue3", "red3"),
+    labels = c("Sin resistencia", "Con resistencia")
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "top"
+  ) #aquí busque en Rpubs para ver como acomodar las etiquetas y que se entendieran
+#y lo saqué de acá: Heiss, A. (2022, 23 junio). Quick and easy ways to deal with 
+#long labels in ggplot2 | Andrew Heiss. Andrew Heiss.
+#https://www-andrewheiss-com.translate.goog/blog/2022/06/23/long-labels-ggplot/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc
+
+nuevos_casos
 
 
 
