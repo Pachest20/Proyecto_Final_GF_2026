@@ -62,6 +62,9 @@ conexiones <- vih_data %>%
          to   = sapply(pares, `[[`, 2)) %>%  # señalando de dónde sale y a dónde llega 
   select(from, to)            # Se descarta la columna "pares"
 
+## Para separar, deshanidar, usamos ClaudeAI, además de mejorar la estructructura 
+##  de este nuevo data frame. 
+
 colores  <- c("NNRTI" = "lightblue", "NRTI"="orange", 
               "PI"="lightgreen", "sin_resistencia"="purple")
 
@@ -111,12 +114,15 @@ conexiones_buena <- vih_data_limpia %>%
          to   = sapply(pares, `[[`, 2)) %>%  # señalando de dónde sale y a dónde llega 
   select(from, to)            # Se descarta la columna "pares"
 
+## Debido a que es una copia del anterior, usamos ClaudeAI, además de mejorar la 
+##  estructructura de este nuevo data frame.
+
 
 g2 <- graph_from_data_frame(conexiones_buena, directed = F)
 
 vcount(g2) ## corroborar si se hizo bien la base 
 
-############## graficar completo ###############3
+############## graficar completo ###############
 
 layout <- layout_with_graphopt(g2, niter  = 15000, charge = 0.08)
 
@@ -134,7 +140,7 @@ legend("bottomright",
        bty    = "n")
 
 
-########### graficar por clusters  ##############
+############# graficar por clusters  ##############
 
 par(mfrow = c(2, 4))
 
@@ -145,7 +151,7 @@ for (sg in subg) {
        vertex.color = colores[vih_data_limpia$resistencia])
 }
 
-legend("bottomright",
+legend("bottomrleft",
        legend = names(colores),
        fill   = colores,
        cex    = 0.5,
